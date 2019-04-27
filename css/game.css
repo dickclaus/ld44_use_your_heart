@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+.grid-container {
+    width: 1024px;
+    height: 512px;
+    background-color: #336699;
+}
+
+.grid-tile {
+    width: 128px;
+    height: 64px;
+    position: absolute;
+    background-image: url("../img/grass01.png");
+}
+
+.over {
+    background-image: url("../img/test3.png");
+}
