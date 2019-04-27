@@ -38,6 +38,21 @@ Grid.prototype.createCross = function() {
     this.container.appendChild(this.cross);
 };
 
+Grid.prototype.loadLevel = function(level) {
+    var level = TileMaps[level];
+    var tileset = level["tilesets"][0]["tiles"];
+    var levelData = level["layers"][0]["data"];
+    for (var j = 0; j < Grid.NUMBER; j++) {
+        for (var i = 0; i < Grid.NUMBER; i++) {
+            var index = Grid.NUMBER * j + i;
+            var textureId = levelData[index];
+            var currentTile = this.tiles[index];
+            var image = tileset[textureId-1]["image"];
+            currentTile.style.backgroundImage = "url(" + image.substring(3) + ")";
+        }
+    }
+};
+
 Grid.prototype.calculateGridPosition = function(mX, mY) {
     var x = Math.floor(-(-mX * Grid.TILE_HEIGHT - mY * Grid.TILE_WIDTH) / (Grid.TILE_WIDTH * Grid.TILE_HEIGHT));
     var y = Math.floor(-(mX * Grid.TILE_HEIGHT - mY * Grid.TILE_WIDTH) / (Grid.TILE_WIDTH * Grid.TILE_HEIGHT));

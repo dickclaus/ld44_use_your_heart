@@ -12,7 +12,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[3, 3, 3, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         "data":[3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3],
          "height":8,
          "id":1,
          "name":"Tile Layer 1",
@@ -53,7 +53,7 @@
          "margin":0,
          "name":"ground",
          "spacing":0,
-         "tilecount":3,
+         "tilecount":6,
          "tileheight":64,
          "tiles":[
                 {
@@ -71,6 +71,24 @@
                 {
                  "id":2,
                  "image":"..\/img\/grass02.png",
+                 "imageheight":64,
+                 "imagewidth":128
+                }, 
+                {
+                 "id":3,
+                 "image":"..\/img\/road-center.png",
+                 "imageheight":64,
+                 "imagewidth":128
+                }, 
+                {
+                 "id":4,
+                 "image":"..\/img\/road-left.png",
+                 "imageheight":64,
+                 "imagewidth":128
+                }, 
+                {
+                 "id":5,
+                 "image":"..\/img\/road-right.png",
                  "imageheight":64,
                  "imagewidth":128
                 }],

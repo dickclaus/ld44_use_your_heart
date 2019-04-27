@@ -14,7 +14,7 @@ Game.prototype.start = function() {
     this.arrow = new Arrow(this.grid);
     this.arrow.setVisibility(false);
 
-
+    this.grid.loadLevel("level01");
     this.grid.container.addEventListener("mousedown", this.onMouseDown.bind(this));
 };
 
