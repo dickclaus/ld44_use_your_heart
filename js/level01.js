@@ -12,7 +12,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         "data":[3, 3, 3, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          "height":8,
          "id":1,
          "name":"Tile Layer 1",
@@ -22,8 +22,19 @@
          "width":8,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":2,
+         "name":"object_layer",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":2,
+ "nextlayerid":4,
  "nextobjectid":1,
  "orientation":"isometric",
  "renderorder":"right-down",
@@ -42,7 +53,7 @@
          "margin":0,
          "name":"ground",
          "spacing":0,
-         "tilecount":2,
+         "tilecount":3,
          "tileheight":64,
          "tiles":[
                 {
@@ -54,6 +65,12 @@
                 {
                  "id":1,
                  "image":"..\/img\/test3.png",
+                 "imageheight":64,
+                 "imagewidth":128
+                }, 
+                {
+                 "id":2,
+                 "image":"..\/img\/grass02.png",
                  "imageheight":64,
                  "imagewidth":128
                 }],

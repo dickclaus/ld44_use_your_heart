@@ -14,9 +14,54 @@ body {
     width: 128px;
     height: 64px;
     position: absolute;
-    background-image: url("../img/grass01.png");
+    background-image: url("../img/grass02.png");
 }
 
-.over {
-    background-image: url("../img/test3.png");
+.hidden {
+    display: none;
+}
+
+.exit-container {
+    width: 128px;
+    height: 256px;
+    position: absolute;
+    background-image: url("../img/exit.png");
+}
+
+.hero-container {
+    width: 128px;
+    height: 256px;
+    position: absolute;
+    background-image: url("../img/hero.png");
+}
+
+.enemy-container {
+    width: 128px;
+    height: 256px;
+    position: absolute;
+    background-image: url("../img/enemy.png");
+}
+
+@keyframes changeBg
+{
+    0%   {background-image: url("../img/arr_0001.png");}
+    20%  {background-image: url("../img/arr_0002.png");}
+    40%  {background-image: url("../img/arr_0003.png");}
+    60%  {background-image: url("../img/arr_0004.png");}
+    80%  {background-image: url("../img/arr_0005.png");}
+    100% {background-image: url("../img/arrow.png");}
+}
+
+.arrow-container {
+    width: 128px;
+    height: 256px;
+    position: absolute;
+    animation: changeBg 1s infinite;
+}
+
+.cross {
+    width: 128px;
+    height: 64px;
+    position: absolute;
+    background-image: url("../img/cross.png");
 }
