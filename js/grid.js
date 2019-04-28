@@ -38,10 +38,13 @@ Grid.prototype.createCross = function() {
     this.container.appendChild(this.cross);
 };
 
-Grid.prototype.loadLevel = function(level) {
-    var level = TileMaps[level];
-    var tileset = level["tilesets"][0]["tiles"];
-    var levelData = level["layers"][0]["data"];
+Grid.prototype.loadLevel = function(levelName) {
+    var level = TileMaps["level01"];
+    var tileset = level['tilesets'][0]['tiles'];
+    var levelDatas = level['layers'].filter(function(layer){
+        return layer.name == levelName;
+    });
+    var levelData = levelDatas[0]["data"];
     for (var j = 0; j < Grid.NUMBER; j++) {
         for (var i = 0; i < Grid.NUMBER; i++) {
             var index = Grid.NUMBER * j + i;

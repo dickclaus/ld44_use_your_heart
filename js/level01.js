@@ -12,10 +12,34 @@
  "infinite":false,
  "layers":[
         {
-         "data":[3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3, 3, 3, 3, 5, 6, 3, 3, 3],
+         "data":[3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3],
          "height":8,
          "id":1,
-         "name":"Tile Layer 1",
+         "name":"level01",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":8,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 9, 0, 0, 0, 0],
+         "height":8,
+         "id":8,
+         "name":"level01_marks",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":8,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[2, 2, 2, 1, 3, 5, 4, 6, 2, 2, 2, 1, 3, 5, 4, 6, 2, 2, 2, 1, 3, 5, 4, 6, 1, 1, 1, 1, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6, 3, 3, 3, 3, 3, 5, 4, 6],
+         "height":8,
+         "id":4,
+         "name":"level02",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -24,18 +48,19 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":2,
-         "name":"object_layer",
-         "objects":[],
+         "data":[7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 9, 0, 0],
+         "height":8,
+         "id":9,
+         "name":"level02_marks",
          "opacity":1,
-         "type":"objectgroup",
+         "type":"tilelayer",
          "visible":true,
+         "width":8,
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":1,
+ "nextlayerid":10,
+ "nextobjectid":4,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
@@ -53,7 +78,7 @@
          "margin":0,
          "name":"ground",
          "spacing":0,
-         "tilecount":6,
+         "tilecount":9,
          "tileheight":64,
          "tiles":[
                 {
@@ -91,6 +116,42 @@
                  "image":"..\/img\/road-right.png",
                  "imageheight":64,
                  "imagewidth":128
+                }, 
+                {
+                 "id":6,
+                 "image":"..\/img\/exit-tile.png",
+                 "imageheight":64,
+                 "imagewidth":128,
+                 "properties":[
+                        {
+                         "name":"map_mark",
+                         "type":"string",
+                         "value":"finish"
+                        }]
+                }, 
+                {
+                 "id":7,
+                 "image":"..\/img\/enemy-tile.png",
+                 "imageheight":64,
+                 "imagewidth":128,
+                 "properties":[
+                        {
+                         "name":"map_mark",
+                         "type":"string",
+                         "value":"enemy"
+                        }]
+                }, 
+                {
+                 "id":8,
+                 "image":"..\/img\/start-tile.png",
+                 "imageheight":64,
+                 "imagewidth":128,
+                 "properties":[
+                        {
+                         "name":"map_mark",
+                         "type":"string",
+                         "value":"start"
+                        }]
                 }],
          "tilewidth":128
         }],
