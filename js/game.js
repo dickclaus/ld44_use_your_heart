@@ -2,6 +2,8 @@ function Game() {
     this.nextMove = {'x':0,'y':0};
     this.moving = false;
     this.currentLevel = 1;
+    this.hearts = [];
+    this.zindexObjects = [];
 }
 
 Game.prototype.start = function() {
@@ -11,18 +13,25 @@ Game.prototype.start = function() {
     this.overlay = new Overlay();
 
     this.exit = new Exit(this.grid);
+    this.zindexObjects.push(this.exit);
     this.hero = new Hero(this.grid);
+    this.zindexObjects.push(this.hero);
     this.enemy = new Enemy(this.grid);
+    this.zindexObjects.push(this.enemy);
 
     this.arrow = new Arrow(this.grid);
     this.arrow.setVisibility(false);
+    this.zindexObjects.push(this.arrow);
 
 
     this.loadLevel(this.currentLevel);
 
     this.grid.container.addEventListener('mousedown', this.onMouseDown.bind(this));
 
-    this.menu.nextTurnButton.addEventListener('mousedown', this.onNextMove.bind(this));
+    //this.menu.nextTurnButton.addEventListener('mousedown', this.onNextMove.bind(this));
+    //this.menu.leaveHeartButton.addEventListener('mousedown', this.onLeaveHeart.bind(this));
+
+    this.showPopup();
 };
 
 Game.prototype.loadLevel = function(level) {
@@ -74,19 +83,48 @@ Game.prototype.onNextMove = function(event) {
         this.moving = true;
         this.moveZombie();
         this.makeMove();
+        for (var i = 0; i < this.hearts.length; i++) {
+            var heart = this.hearts[i];
+            heart.setVisibility(true);
+        }
+    }
+};
+
+Game.prototype.onLeaveHeart = function(event) {
+    if (this.menu.liveIndicator.lives > 1) {
+
+        var heart = new Heart(this.grid);
+        heart.setPosition(this.hero.posX, this.hero.posY);
+        heart.setVisibility(false);
+        this.hearts.push(heart);
+        this.menu.liveIndicator.leaveHeart();
     }
 };
 
 Game.prototype.moveZombie = function() {
-    var distX = this.enemy.posX - this.hero.posX;
-    var distY = this.enemy.posY - this.hero.posY;
-    var moveX = distX > 0 ? -1 : 1;
-    var moveY = distY > 0 ? -1 : 1;
-    if (Math.abs(distX) > Math.abs(distY)) {
-        this.enemy.setPosition(this.enemy.posX + moveX, this.enemy.posY);
+    if (this.hearts.length > 0) {
+        var distX = this.enemy.posX - this.hearts[0].posX;
+        var distY = this.enemy.posY - this.hearts[0].posY;
+        if (distX == 0 && distY == 0) return;
+        var moveX = distX > 0 ? -1 : 1;
+        var moveY = distY > 0 ? -1 : 1;
+        if (Math.abs(distX) > Math.abs(distY)) {
+            this.enemy.setPosition(this.enemy.posX + moveX, this.enemy.posY);
+        } else {
+            this.enemy.setPosition(this.enemy.posX, this.enemy.posY + moveY);
+        }
     } else {
-        this.enemy.setPosition(this.enemy.posX, this.enemy.posY + moveY);
+        var distX = this.enemy.posX - this.hero.posX;
+        var distY = this.enemy.posY - this.hero.posY;
+        var moveX = distX > 0 ? -1 : 1;
+        var moveY = distY > 0 ? -1 : 1;
+        if (Math.abs(distX) > Math.abs(distY)) {
+            this.enemy.setPosition(this.enemy.posX + moveX, this.enemy.posY);
+        } else {
+            this.enemy.setPosition(this.enemy.posX, this.enemy.posY + moveY);
+        }
     }
+
 };
 
 Game.prototype.makeMove = function(event) {
@@ -106,6 +144,10 @@ Game.prototype.makeMove = function(event) {
 };
 
 Game.prototype.checkEndGame = function() {
+    if (this.hero.posX == this.enemy.posX && this.hero.posY == this.enemy.posY) {
+        this.showKilled();
+        return;
+    }
     if (this.hero.isPosition({'x':this.exit.posX, 'y':this.exit.posY})) {
         this.currentLevel++;
         if (this.currentLevel == 3) {
@@ -121,9 +163,51 @@ Game.prototype.checkEndGame = function() {
     }
 };
 
+Game.prototype.showPopup = function() {
+    this.popup = document.getElementsByClassName('popup-container')[0];
+    this.overlay.container.appendChild(this.popup);
+
+    var startButton = document.getElementsByClassName('start-button')[0];
+    startButton.addEventListener('click', function() {
+        this.overlay.container.removeChild(this.overlay.container.firstChild);
+        this.overlay.hideOverlay();
+        this.menu.nextTurnButton.addEventListener('mousedown', this.onNextMove.bind(this));
+        this.menu.leaveHeartButton.addEventListener('mousedown', this.onLeaveHeart.bind(this));
+    }.bind(this));
+};
+
 Game.prototype.showGameWin = function() {
-    console.log('show game win');
     this.overlay.showOverlay();
+    this.popup = document.createElement('div');
+    this.popup.setAttribute('class', 'popup-container');
+    this.overlay.container.appendChild(this.popup);
+
+    this.popup.innerHTML = "<br><center><h2>You win</h2>" +
+        "</center>" +
+        "<center>You managed to escape..." +
+        "<br><br><center><button class='win-button'>Once again?</button></center>";
+
+    var restartButton = document.getElementsByClassName('win-button')[0];
+    restartButton.addEventListener('click', function() {
+        window.location.reload(false);
+    }.bind(this));
+};
+
+Game.prototype.showKilled = function() {
+    this.overlay.showOverlay();
+    this.popup = document.createElement('div');
+    this.popup.setAttribute('class', 'popup-container');
+    this.overlay.container.appendChild(this.popup);
+
+    this.popup.innerHTML = "<center><h2>Use your heart</h2>" +
+        "<h3>game for Ludum Dare 44 by Dmitry Bezverkhiy</h3></center>" +
+        "<center>You were eaten by zombies..." +
+        "<br><br><center><button class='restart-button'>Restart</button></center>";
+
+    var restartButton = document.getElementsByClassName('restart-button')[0];
+    restartButton.addEventListener('click', function() {
+        window.location.reload(false);
+    }.bind(this));
 };
 
 let game = new Game();

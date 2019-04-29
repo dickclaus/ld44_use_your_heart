@@ -22,6 +22,11 @@ LiveIndicator.prototype.createHearts = function() {
     }
 };
 
+LiveIndicator.prototype.leaveHeart = function() {
+    this.lives--;
+    this.createHearts();
+};
+
 
 
 
