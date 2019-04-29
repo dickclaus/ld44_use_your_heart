@@ -23,6 +23,11 @@ Game.prototype.start = function() {
     this.arrow.setVisibility(false);
     this.zindexObjects.push(this.arrow);
 
+    window.createjs.Sound.registerSound("sounds/theme.mp3", "music");
+    window.createjs.Sound.registerSound("sounds/walk.ogg", "walk");
+    window.createjs.Sound.registerSound("sounds/zombie.ogg", "zombie");
+    window.createjs.Sound.registerSound("sounds/eat.ogg", "eat");
+
 
     this.loadLevel(this.currentLevel);
 
@@ -92,7 +97,6 @@ Game.prototype.onNextMove = function(event) {
 
 Game.prototype.onLeaveHeart = function(event) {
     if (this.menu.liveIndicator.lives > 1) {
-
         var heart = new Heart(this.grid);
         heart.setPosition(this.hero.posX, this.hero.posY);
         heart.setVisibility(false);
@@ -102,10 +106,14 @@ Game.prototype.onLeaveHeart = function(event) {
 };
 
 Game.prototype.moveZombie = function() {
+    window.createjs.Sound.play("zombie");
     if (this.hearts.length > 0) {
         var distX = this.enemy.posX - this.hearts[0].posX;
         var distY = this.enemy.posY - this.hearts[0].posY;
-        if (distX == 0 && distY == 0) return;
+        if (distX == 0 && distY == 0) {
+            window.createjs.Sound.play("eat");
+            return;
+        }
         var moveX = distX > 0 ? -1 : 1;
         var moveY = distY > 0 ? -1 : 1;
         if (Math.abs(distX) > Math.abs(distY)) {
@@ -137,6 +145,7 @@ Game.prototype.makeMove = function(event) {
     } else {
         this.hero.setPosition(this.hero.posX, this.hero.posY + moveY);
     }
+    window.createjs.Sound.play("walk");
     setTimeout(function() {
         this.moving = false;
         this.checkEndGame();
@@ -171,6 +180,7 @@ Game.prototype.showPopup = function() {
     startButton.addEventListener('click', function() {
         this.overlay.container.removeChild(this.overlay.container.firstChild);
         this.overlay.hideOverlay();
+        window.createjs.Sound.play("music", {loop:-1, volume:1});
         this.menu.nextTurnButton.addEventListener('mousedown', this.onNextMove.bind(this));
         this.menu.leaveHeartButton.addEventListener('mousedown', this.onLeaveHeart.bind(this));
     }.bind(this));
@@ -194,6 +204,7 @@ Game.prototype.showGameWin = function() {
 };
 
 Game.prototype.showKilled = function() {
+    window.createjs.Sound.play("eat");
     this.overlay.showOverlay();
     this.popup = document.createElement('div');
     this.popup.setAttribute('class', 'popup-container');
